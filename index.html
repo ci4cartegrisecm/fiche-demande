@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Carte Grise - Document Officiel</title>
+    <meta name="description" content="Document Carte Grise accessible par QR Code">
+    <style>
+        /* Reset & Base */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            min-height: 100vh;
+            padding: 20px;
+        }
+        
+        /* Container */
+        .container {
+            max-width: 900px;
+            margin: 20px auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.15);
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(to right, #2c3e50, #4a6491);
+            color: white;
+            padding: 40px 30px;
+            text-align: center;
+        }
+        .header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+        }
+        .header p {
+            opacity: 0.9;
+            font-size: 16px;
+        }
+        
+        /* Content */
+        .content {
+            padding: 40px;
+        }
+        
+        /* PDF Viewer */
+        .pdf-section {
+            margin: 30px 0;
+            border: 2px solid #eaeaea;
+            border-radius: 15px;
+            overflow: hidden;
+        }
+        .pdf-viewer {
+            width: 100%;
+            height: 600px;
+            border: none;
+        }
+        
+        /* QR Code Section */
+        .qr-section {
+            background: #f8f9fa;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin: 40px 0;
+        }
+        .qr-code {
+            background: white;
+            padding: 20px;
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin: 20px 0;
+        }
+        .qr-code img {
+            width: 200px;
+            height: 200px;
+        }
+        
+        /* Buttons */
+        .btn-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            justify-content: center;
+            margin: 30px 0;
+        }
+        .btn {
+            padding: 15px 30px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            min-width: 200px;
+        }
+        .btn-primary {
+            background: linear-gradient(to right, #667eea, #764ba2);
+            color: white;
+        }
+        .btn-secondary {
+            background: #f1f3f4;
+            color: #333;
+            border: 2px solid #ddd;
+        }
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+        
+        /* Info Boxes */
+        .info-box {
+            background: #e8f4fd;
+            border-left: 5px solid #2196f3;
+            padding: 25px;
+            border-radius: 10px;
+            margin: 30px 0;
+        }
+        .info-box h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+        .info-box ul {
+            list-style: none;
+            padding-left: 0;
+        }
+        .info-box li {
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+        }
+        
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 30px;
+            background: #2c3e50;
+            color: rgba(255,255,255,0.8);
+            font-size: 14px;
+        }
+        
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .content { padding: 20px; }
+            .pdf-viewer { height: 400px; }
+            .btn { min-width: 100%; }
+            .header { padding: 30px 20px; }
+            .header h1 { font-size: 24px; }
+        }
+        
+        /* Print Styles */
+        @media print {
+            body { background: white !important; }
+            .container { box-shadow: none !important; }
+            .btn, .qr-section { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>📋 Carte Grise</h1>
+            <p>Document officiel | Accessible par QR Code</p>
+            <p style="margin-top: 10px; font-size: 14px;">Version numérique sécurisée</p>
+        </div>
+        
+        <!-- Main Content -->
+        <div class="content">
+            <!-- Information Box -->
+            <div class="info-box">
+                <h3>ℹ️ À propos de ce document</h3>
+                <ul>
+                    <li><strong>Document :</strong> Carte Grise officielle</li>
+                    <li><strong>Format :</strong> PDF numérique</li>
+                    <li><strong>Accès :</strong> QR Code unique</li>
+                    <li><strong>Mobile :</strong> Optimisé pour smartphone</li>
+                    <li><strong>Validité :</strong> Document à jour</li>
+                </ul>
+            </div>
+            
+            <!-- PDF Viewer -->
+            <h2 style="margin-bottom: 20px;">📄 Visualisation du document</h2>
+            <div class="pdf-section">
+                <iframe class="pdf-viewer" 
+                        id="pdfViewer"
+                        title="Document Carte Grise PDF">
+                    Votre navigateur ne supporte pas l'affichage PDF. 
+                    Veuillez télécharger le document.
+                </iframe>
+            </div>
+            
+            <!-- Action Buttons -->
+            <div class="btn-group">
+                <button class="btn btn-primary" onclick="downloadPDF()">
+                    ⬇️ Télécharger le PDF
+                </button>
+                <button class="btn btn-secondary" onclick="window.print()">
+                    🖨️ Imprimer le document
+                </button>
+                <button class="btn btn-secondary" onclick="sharePage()">
+                    📤 Partager
+                </button>
+            </div>
+            
+            <!-- QR Code Section -->
+            <div class="qr-section">
+                <h3>🔗 QR Code d'accès</h3>
+                <p>Scannez ce code pour accéder à ce document depuis un autre appareil</p>
+                
+                <div class="qr-code">
+                    <!-- QR Code will be generated here -->
+                    <img id="qrImage" alt="QR Code">
+                </div>
+                
+                <p style="margin-top: 15px; font-size: 14px; color: #666;">
+                    <strong>Instructions :</strong> Ouvrez l'appareil photo de votre smartphone 
+                    et pointez vers le code QR
+                </p>
+            </div>
+            
+            <!-- Usage Instructions -->
+            <div class="info-box">
+                <h3>📱 Comment utiliser</h3>
+                <ol style="padding-left: 20px;">
+                    <li>Scannez le QR Code avec votre smartphone</li>
+                    <li>Consultez le document directement en ligne</li>
+                    <li>Téléchargez une copie si nécessaire</li>
+                    <li>Partagez le QR Code pour donner l'accès à d'autres</li>
+                </ol>
+            </div>
+        </div>
+        
+        <!-- Footer -->
+        <div class="footer">
+            <p>Document numérique sécurisé | Généré le <span id="currentDate"></span></p>
+            <p style="margin-top: 10px;">Accès via : <span id="pageUrl"></span></p>
+            <p style="margin-top: 10px; font-size: 12px;">© Carte Grise Document</p>
+        </div>
+    </div>
+    
+    <!-- JavaScript -->
+    <script>
+        // Configuration
+        const PDF_URL = 'REPLACE_WITH_YOUR_PDF_URL';
+        const PDF_FILENAME = 'carte-grise-document.pdf';
+        
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            // 1. Set PDF viewer
+            const pdfViewer = document.getElementById('pdfViewer');
+            if (PDF_URL) {
+                pdfViewer.src = `https://docs.google.com/viewer?url=${encodeURIComponent(PDF_URL)}&embedded=true`;
+            }
+            
+            // 2. Generate QR Code dynamically
+            const currentUrl = window.location.href;
+            const qrImage = document.getElementById('qrImage');
+            qrImage.src = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(currentUrl)}`;
+            
+            // 3. Set current date
+            const now = new Date();
+            const options = { day: '2-digit', month: '2-digit', year: 'numeric' };
+            document.getElementById('currentDate').textContent = now.toLocaleDateString('fr-FR', options);
+            
+            // 4. Display page URL
+            document.getElementById('pageUrl').textContent = currentUrl;
+            
+            // 5. Simple analytics (optional)
+            console.log('Document accessed via QR Code:', new Date().toISOString());
+            
+            // Store in localStorage for repeat visits
+            let visitCount = localStorage.getItem('visitCount') || 0;
+            visitCount = parseInt(visitCount) + 1;
+            localStorage.setItem('visitCount', visitCount);
+            localStorage.setItem('lastVisit', now.toISOString());
+        });
+        
+        // Download PDF function
+        function downloadPDF() {
+            if (!PDF_URL) {
+                alert('PDF URL non configurée. Veuillez contacter l\'administrateur.');
+                return;
+            }
+            
+            // Create a temporary link for download
+            const link = document.createElement('a');
+            link.href = PDF_URL;
+            link.download = PDF_FILENAME;
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Optional: Track downloads
+            console.log('PDF downloaded:', new Date().toISOString());
+        }
+        
+        // Share page function
+        function sharePage() {
+            if (navigator.share) {
+                navigator.share({
+                    title: 'Carte Grise Document',
+                    text: 'Accédez à ce document officiel via QR Code',
+                    url: window.location.href
+                });
+            } else {
+                // Fallback: Copy to clipboard
+                navigator.clipboard.writeText(window.location.href)
+                    .then(() => alert('Lien copié dans le presse-papier!'))
+                    .catch(() => prompt('Copiez ce lien:', window.location.href));
+            }
+        }
+        
+        // Handle PDF errors
+        function handlePdfError() {
+            document.getElementById('pdfViewer').innerHTML = 
+                '<div style="padding: 40px; text-align: center;">' +
+                '<h3>❌ Erreur de chargement</h3>' +
+                '<p>Le document PDF n\'a pas pu être chargé.</p>' +
+                '<button onclick="downloadPDF()" style="padding: 10px 20px; margin-top: 20px;">' +
+                'Télécharger directement</button></div>';
+        }
+    </script>
+</body>
+</html>
